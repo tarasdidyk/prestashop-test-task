@@ -19,6 +19,7 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
 
     public void afterNavigateTo(String url, WebDriver driver) {
         System.out.println("Navigated to:'" + url + "'");
+        log("Navigated to:'" + url + "'");
     }
 
     public void beforeChangeValueOf(WebElement element, WebDriver driver) {
@@ -64,6 +65,7 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
 
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         System.out.println("Trying to find Element By : " + by.toString());
+        log("Trying to find Element By : " + by.toString());
     }
 
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
