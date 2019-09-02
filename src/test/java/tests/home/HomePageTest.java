@@ -23,15 +23,15 @@ public class HomePageTest extends BaseTest {
 
     @Test
     public void verifyHomePageTitleTest() {
-        listener.log("test1");
+        listener.log("getting home page title");
         String homePageTitle = homePAGE.getTitle();
-        listener.log("test2");
+        listener.log("comparing the home page title with the expected result");
         Assert.assertEquals(homePageTitle, "prestashop-automation", "Home page title does not matched");
     }
 
     @Test
     public void verifySiteCurrencyEqualsProductsCurrencyTest() {
-        listener.log("currency comparison");
+        listener.log("currency comparing");
         Assert.assertEquals(homePAGE.getCurrentProductCurrency(),
                 homePAGE.getCurrentSiteCurrency(), "Currency does not match");
     }

@@ -24,43 +24,47 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
 
     public void beforeChangeValueOf(WebElement element, WebDriver driver) {
         System.out.println("Value of the:" + element.toString() + " before any changes made");
+        log("Value of the:" + element.toString() + " before any changes made");
     }
 
     public void afterChangeValueOf(WebElement element, WebDriver driver) {
         System.out.println("Element value changed to: " + element.toString());
+        log("Element value changed to: " + element.toString());
     }
 
     public void beforeClickOn(WebElement element, WebDriver driver) {
         System.out.println("Trying to click on: " + element.toString());
+        log("Trying to click on: " + element.toString());
     }
 
     public void afterClickOn(WebElement element, WebDriver driver) {
         System.out.println("Clicked on: " + element.toString());
+        log("Clicked on: " + element.toString());
     }
 
     public void beforeNavigateBack(WebDriver driver) {
         System.out.println("Navigating back to previous page");
+        log("Navigating back to previous page");
     }
 
     public void afterNavigateBack(WebDriver driver) {
         System.out.println("Navigated back to previous page");
+        log("Navigated back to previous page");
     }
 
     public void beforeNavigateForward(WebDriver driver) {
         System.out.println("Navigating forward to next page");
+        log("Navigating forward to next page");
     }
 
     public void afterNavigateForward(WebDriver driver) {
         System.out.println("Navigated forward to next page");
+        log("Navigated forward to next page");
     }
 
     public void onException(Throwable error, WebDriver driver) {
         System.out.println("Exception occured: " + error);
-        try {
-            UtilTest.takeScreenshotAtEndOfTest();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        log("Exception occured: " + error);
     }
 
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
@@ -70,6 +74,7 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
 
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
         System.out.println("Found Element By : " + by.toString());
+        log("Found Element By : " + by.toString());
     }
 
     /*
@@ -155,7 +160,7 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
 
     public void log(String message) {
 
-        Reporter.log(message +"<br>");
+        Reporter.log(message + "<br>");
 
     }
 
