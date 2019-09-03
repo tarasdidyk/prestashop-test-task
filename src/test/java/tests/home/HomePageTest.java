@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.blocks.Header;
 import pages.home.HomePage;
 import tests.common.BaseTest;
 import utils.UtilTest;
@@ -14,11 +15,13 @@ public class HomePageTest extends BaseTest {
     HomePage homePAGE;
     WebEventListener listener;
     UtilTest util;
+    Header header;
 
     @BeforeMethod
     public void setUp() {
         homePAGE = new HomePage();
         listener = new WebEventListener();
+        header = new Header();
     }
 
     @Test
@@ -35,4 +38,13 @@ public class HomePageTest extends BaseTest {
         Assert.assertEquals(homePAGE.getCurrentProductCurrency(),
                 homePAGE.getCurrentSiteCurrency(), "Currency does not match");
     }
+
+    @Test
+    public void changeCurrentCurrencyToUsd() {
+        listener.log("open currency dropdown");
+        header.openCurrencyDropDown();
+        listener.log("select usd currency");
+        header.selectUsdCurrency();
+    }
+
 }
