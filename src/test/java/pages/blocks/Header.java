@@ -13,11 +13,11 @@ public class Header extends BaseTest {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//div[contains(@id,'desktop_currency_selector')]")
+    @FindBy(xpath = "//div[contains(@id,'_desktop_currency_selector')]//a[contains(@class,'hidden-sm-down')]")
     WebElement currencyDropDown;
 
 
-    @FindBy(xpath = ".//a[contains(@class, 'dropdown-item')]")
+    @FindBy(xpath = "//div[contains(@class,'currency-selector')]//a[contains(text(),'USD $')]")
     WebElement usdCurrencyDropDownItem;
 
     @Step

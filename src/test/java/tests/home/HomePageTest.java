@@ -43,7 +43,7 @@ public class HomePageTest extends BaseTest {
     public void changeCurrentCurrencyToUsd() {
         listener.log("open currency dropdown");
         header.openCurrencyDropDown();
-        listener.log("select usd currency");
+       listener.log("select usd currency");
         header.selectUsdCurrency();
     }
 
