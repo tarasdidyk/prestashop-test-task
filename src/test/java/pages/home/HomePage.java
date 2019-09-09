@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import tests.common.BaseTest;
+import common.BaseTest;
 
 public class HomePage extends BaseTest {
 
@@ -13,6 +13,12 @@ public class HomePage extends BaseTest {
 
     @FindBy(xpath = "//span[contains(@class, 'expand-more _gray-darker hidden-sm-down')]")
     private WebElement currencyDropDown;
+
+    @FindBy(xpath = "//div[contains(@id, 'search_widget')]//input[contains(@type, 'text')]")
+    private  WebElement searchField;
+
+    @FindBy(xpath = "//div[contains(@id, 'search_widget')]//button[contains(@type, 'submit')]")
+    private WebElement searchButton;
 
     // init Page objects
     public HomePage() {
@@ -62,4 +68,11 @@ public class HomePage extends BaseTest {
         }
         return null;
     }
+
+    @Step
+    public void searchByWords(String searchQuery) {
+        searchField.sendKeys(searchQuery);
+        searchButton.click();
+    }
+
 }

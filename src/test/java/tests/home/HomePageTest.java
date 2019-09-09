@@ -1,12 +1,11 @@
 package tests.home;
 
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.blocks.Header;
 import pages.home.HomePage;
-import tests.common.BaseTest;
+import common.BaseTest;
 import utils.UtilTest;
 import utils.WebEventListener;
 
@@ -40,11 +39,17 @@ public class HomePageTest extends BaseTest {
     }
 
     @Test
-    public void changeCurrentCurrencyToUsd() {
+    public void changeCurrentCurrencyToUsdTest() {
         listener.log("open currency dropdown");
         header.openCurrencyDropDown();
-       listener.log("select usd currency");
+        listener.log("select usd currency");
         header.selectUsdCurrency();
+    }
+
+    @Test
+    public void searchByDressTest() {
+        String dress = "dress";
+        homePAGE.searchByWords(dress);
     }
 
 }

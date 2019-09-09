@@ -6,9 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.Reporter;
-import tests.common.BaseTest;
-
-import java.io.IOException;
+import common.BaseTest;
 
 public class WebEventListener extends BaseTest implements WebDriverEventListener {
 
