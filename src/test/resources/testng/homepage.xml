@@ -5,6 +5,7 @@
     <test name="Home Page">
         <classes>
             <class name="tests.home.HomePageTest"/>
+            <class name="tests.home.SearchResultPageTest"/>
         </classes>
     </test>
 </suite>

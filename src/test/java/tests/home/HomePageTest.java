@@ -21,6 +21,7 @@ public class HomePageTest extends BaseTest {
         homePAGE = new HomePage();
         listener = new WebEventListener();
         header = new Header();
+        homePAGE.openMainUrl();
     }
 
     @Test
@@ -44,12 +45,6 @@ public class HomePageTest extends BaseTest {
         header.openCurrencyDropDown();
         listener.log("select usd currency");
         header.selectUsdCurrency();
-    }
-
-    @Test
-    public void searchByDressTest() {
-        String dress = "dress";
-        homePAGE.searchByWords(dress);
     }
 
 }

@@ -15,7 +15,7 @@ public class HomePage extends BaseTest {
     private WebElement currencyDropDown;
 
     @FindBy(xpath = "//div[contains(@id, 'search_widget')]//input[contains(@type, 'text')]")
-    private  WebElement searchField;
+    private WebElement searchField;
 
     @FindBy(xpath = "//div[contains(@id, 'search_widget')]//button[contains(@type, 'submit')]")
     private WebElement searchButton;
@@ -73,6 +73,10 @@ public class HomePage extends BaseTest {
     public void searchByWords(String searchQuery) {
         searchField.sendKeys(searchQuery);
         searchButton.click();
+    }
+
+    public void openMainUrl() {
+            driver.get(prop.getProperty("url"));
     }
 
 }
