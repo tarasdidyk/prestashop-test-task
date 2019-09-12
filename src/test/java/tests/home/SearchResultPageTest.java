@@ -26,11 +26,12 @@ public class SearchResultPageTest extends BaseTest {
         String dress = "dress";
         listener.log("search by dress");
         homePage.searchByWords(dress);
+        searchResultPage.getTotalProductsText();
     }
 
     @Test
     public void countSearchProductsTest() {
-        searchResultPage.getTotalProductsText();
-        System.out.println(searchResultPage.getTotalProductsText());
+       // searchResultPage.getTotalProductsText();
+
     }
  }
