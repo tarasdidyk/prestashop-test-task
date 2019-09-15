@@ -76,7 +76,6 @@ public class HomePage extends BaseTest {
     }
 
     public void openMainUrl() {
-            driver.get(prop.getProperty("url"));
+        driver.get(prop.getProperty("url"));
     }
-
 }

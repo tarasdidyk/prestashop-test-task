@@ -6,14 +6,14 @@ import org.testng.annotations.Test;
 import pages.blocks.Header;
 import pages.home.HomePage;
 import common.BaseTest;
-import utils.UtilTest;
+import utils.Util;
 import utils.WebEventListener;
 
 public class HomePageTest extends BaseTest {
 
     HomePage homePAGE;
     WebEventListener listener;
-    UtilTest util;
+    Util util;
     Header header;
 
     @BeforeMethod
