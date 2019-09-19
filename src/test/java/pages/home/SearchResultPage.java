@@ -1,6 +1,7 @@
 package pages.home;
 
 import common.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,6 +31,7 @@ public class SearchResultPage extends BaseTest {
     @FindBy(xpath = "//a[contains(text(), 'Цене: от высокой к низкой')]")
     private WebElement sortItemByDescending;
 
+
     public String getWebElementText(WebElement element) {
         return element.getText();
     }
@@ -57,5 +59,12 @@ public class SearchResultPage extends BaseTest {
     public void sortByDescending() {
         sortingDropDownList.isEnabled();
         sortItemByDescending.click();
+    }
+
+    public void getProductWithRegularPrice() {
+        for (WebElement listItem: getProductPriceList()) {
+            WebElement element =  listItem.findElement(By.xpath("//span[contains(@class, \"regular-price\")]"));
+            System.out.println("Test:  "+element.getText());
+        }
     }
 }
