@@ -58,12 +58,13 @@ public class BaseTest {
         driver.manage().timeouts().pageLoadTimeout(Util.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(Util.IMPLICIT_WAIT, TimeUnit.SECONDS);
 
+
         //driver.get(prop.getProperty("url"));
     }
 
     @AfterTest
     public void quit() {
-       driver.quit();
+     //  driver.quit();
     }
 
 }

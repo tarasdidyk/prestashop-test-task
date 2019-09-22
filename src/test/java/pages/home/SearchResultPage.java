@@ -18,7 +18,7 @@ public class SearchResultPage extends BaseTest {
     @FindBy(xpath = "//div[contains(@id, 'js-product-list-top')]")
     private WebElement searchResultTitle;
 
-    @FindBy(xpath = "//span[contains(@itemprop, 'price')]")
+    @FindBy(xpath = "//div[contains(@class, 'product-price-and-shipping')]")
     private List<WebElement> productsPriceList;
 
     @FindBy(xpath = "//article[contains(@class, 'product-miniature js-product-miniature')]")
