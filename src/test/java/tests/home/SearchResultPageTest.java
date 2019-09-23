@@ -11,6 +11,8 @@ import pages.home.SearchResultPage;
 import utils.Util;
 import utils.WebEventListener;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,25 +47,35 @@ public class SearchResultPageTest extends BaseTest {
         List<WebElement> productList = searchResultPage.getProductPriceList();
 
         for (WebElement productListItem : productList) {
-        //    Assert.assertEquals(productListItem.getText()
-               //     .substring(productListItem.getText().length() - 1), "$", "Currency does not match usd");
+            Assert.assertEquals(productListItem.getText()
+                    .substring(productListItem.getText().length() - 1), "$", "Currency does not match usd");
         }
 
     }
 
     @Test(priority = 4)
-    public void sortByDescendingTest() {
+    public void sortByDescendingTest() throws ParseException {
         searchResultPage.openSortingDropDown();
         searchResultPage.sortByDescending();
+        List<Double> productPriceWithOutDiscount = new ArrayList<>();
+
         Util.delay(0, 5);
         for (WebElement productListItem : searchResultPage.getProductPriceList()) {
-            ArrayList<Double> priceProductItem = new ArrayList<Double>();
-            priceProductItem
-                    .add(Double.parseDouble(productListItem.getText().replaceAll("[\\D]", "")));
-            WebElement element =  productListItem.findElement(By.xpath("//span[contains(@class, \"regular-price\")]"));
-
-            System.out.println(element);
-           // searchResultPage.getProductWithRegularPrice();
+            String b = productListItem.getText().substring(0, productListItem.getText().indexOf("$"));
+            double c = DecimalFormat.getNumberInstance().parse(b).doubleValue();
+            productPriceWithOutDiscount.add(c);
+        }
+        int count = 0;
+        for (int listItem = 0; listItem < productPriceWithOutDiscount.size() - 1; listItem++) {
+            if (productPriceWithOutDiscount.get(listItem) >= productPriceWithOutDiscount.get(listItem + 1)) {
+                count++;
+                System.out.println(count);
+                if (count == productPriceWithOutDiscount.size() - 1) {
+                    System.out.println("Products sorted from high to low price");
+                }
+            } else {
+                System.out.println("Products did not sort from high to low price");
+            }
         }
     }
 }
