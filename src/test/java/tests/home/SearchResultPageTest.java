@@ -1,6 +1,7 @@
 package tests.home;
 
 import common.BaseTest;
+import org.apache.tika.io.IOUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -11,6 +12,8 @@ import pages.home.SearchResultPage;
 import utils.Util;
 import utils.WebEventListener;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -75,15 +78,30 @@ public class SearchResultPageTest extends BaseTest {
     }
 
     @Test(priority = 5)
-    public void productsWithDiscountTest() {
-        for(WebElement element: searchResultPage.getProductPriceList()) {
-            System.out.println(element.getText());
-            if(element.getText().contains("%")) {
-                WebElement element2 = driver.findElement("//span[contains(@text(), '"+By.xpath(element.getText()"+"'z'"//span[contains(@class, \"regular-price\")]"));
-                System.out.println("=========="+element2.getText()+"========================");
-                element.getText()
+    public void productsWithDiscountTest() throws IOException, ParseException {
+        List<String> lines = IOUtils.readLines(new StringReader(""));
+        for (WebElement element : searchResultPage.getProductPriceList()) {
+            if (element.getText().contains("%")) {
+
+               System.out.println(element.getText());
+                // lines.add(IOUtils.readLines(new StringReader(element.getText())).toString());
+                String a = element.getText().substring(0, element.getText().indexOf("$"));
+                String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"+"\n"));
+                String c = element.getText().substring(element.getText().indexOf("%"+""));
+                double a1 = DecimalFormat.getNumberInstance().parse(a).doubleValue();
+                System.out.println(a1);
+                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
+                double b1 = DecimalFormat.getNumberInstance().parse(b).doubleValue();
+                System.out.println(b1);
+                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
+                double c1 = DecimalFormat.getNumberInstance().parse(c).doubleValue();
+                System.out.println(c1);
+
             }
         }
+       /* for(String a: lines) {
+            System.out.println(a);
+        }*/
     }
 
 }
