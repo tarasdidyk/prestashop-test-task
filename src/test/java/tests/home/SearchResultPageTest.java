@@ -69,14 +69,22 @@ public class SearchResultPageTest extends BaseTest {
         for (int listItem = 0; listItem < productPriceWithOutDiscount.size() - 1; listItem++) {
             if (productPriceWithOutDiscount.get(listItem) >= productPriceWithOutDiscount.get(listItem + 1)) {
                 count++;
-                System.out.println(count);
-                if (count == productPriceWithOutDiscount.size() - 1) {
-                    System.out.println("Products sorted from high to low price");
-                }
-            } else {
-                System.out.println("Products did not sort from high to low price");
+            }
+        }
+        Assert.assertEquals(count, productPriceWithOutDiscount.size() - 1, "Products did not sort from high to low price");
+    }
+
+    @Test(priority = 5)
+    public void productsWithDiscountTest() {
+        for(WebElement element: searchResultPage.getProductPriceList()) {
+            System.out.println(element.getText());
+            if(element.getText().contains("%")) {
+                WebElement element2 = driver.findElement("//span[contains(@text(), '"+By.xpath(element.getText()"+"'z'"//span[contains(@class, \"regular-price\")]"));
+                System.out.println("=========="+element2.getText()+"========================");
+                element.getText()
             }
         }
     }
+
 }
 
