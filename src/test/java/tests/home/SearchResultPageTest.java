@@ -83,18 +83,20 @@ public class SearchResultPageTest extends BaseTest {
         for (WebElement element : searchResultPage.getProductPriceList()) {
             if (element.getText().contains("%")) {
 
-               System.out.println(element.getText());
+              // System.out.println(element.getText());
                 // lines.add(IOUtils.readLines(new StringReader(element.getText())).toString());
                 String a = element.getText().substring(0, element.getText().indexOf("$"));
-                String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"+"\n"));
-                String c = element.getText().substring(element.getText().indexOf("%"+""));
+                String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"));
+                String c = element.getText().substring(element.getText().indexOf("%")+2, element.getText().lastIndexOf("$")-1);
                 double a1 = DecimalFormat.getNumberInstance().parse(a).doubleValue();
+                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
                 System.out.println(a1);
                 System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
                 double b1 = DecimalFormat.getNumberInstance().parse(b).doubleValue();
                 System.out.println(b1);
                 System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
                 double c1 = DecimalFormat.getNumberInstance().parse(c).doubleValue();
+                //double c1 = DecimalFormat.getNumberInstance().parse("1,08").doubleValue();
                 System.out.println(c1);
 
             }
