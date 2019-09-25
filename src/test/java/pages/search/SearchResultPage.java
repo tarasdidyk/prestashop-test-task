@@ -1,4 +1,4 @@
-package pages.home;
+package pages.search;
 
 import common.BaseTest;
 import org.openqa.selenium.By;

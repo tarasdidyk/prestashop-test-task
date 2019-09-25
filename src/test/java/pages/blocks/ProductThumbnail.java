@@ -1,14 +1,11 @@
-package tests.home;
+package pages.blocks;
 
 import common.BaseTest;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import pages.home.HomePage;
 import pages.search.SearchResultPage;
 import utils.Util;
-import utils.WebEventListener;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -16,45 +13,14 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultPageTest extends BaseTest {
+public class ProductThumbnail extends BaseTest {
 
-    HomePage homePage;
-    SearchResultPage searchResultPage;
-    WebEventListener listener;
-
-    @BeforeMethod
-    public void setUp() {
-        homePage = new HomePage();
-        searchResultPage = new SearchResultPage();
-        listener = new WebEventListener();
+    public ProductThumbnail() {
+        PageFactory.initElements(driver, this);
     }
 
-    @Test(priority = 1)
-    public void searchByDressTest() {
-        String dress = "dress";
-        listener.log("search by dress");
-        homePage.searchByWords(dress);
-    }
-
-    @Test(priority = 2)
-    public void countSearchProductsTest() {
-        Assert.assertEquals(searchResultPage.getProductListSize(),
-                searchResultPage.getSearchResultTitleCount(), "Search result does not match with search title");
-    }
-
-    @Test(priority = 3)
-    public void productListCurrencyTest() {
-        List<WebElement> productList = searchResultPage.getProductPriceList();
-
-        for (WebElement productListItem : productList) {
-            Assert.assertEquals(productListItem.getText()
-                    .substring(productListItem.getText().length() - 1), "$", "Currency does not match usd");
-        }
-
-    }
-
-    @Test(priority = 4)
     public void sortByDescendingTest() throws ParseException {
+        SearchResultPage searchResultPage = new SearchResultPage();
         searchResultPage.openSortingDropDown();
         searchResultPage.sortByDescending();
         List<Double> productPriceWithOutDiscount = new ArrayList<>();
@@ -74,8 +40,8 @@ public class SearchResultPageTest extends BaseTest {
         Assert.assertEquals(count, productPriceWithOutDiscount.size() - 1, "Products did not sort from high to low price");
     }
 
-    @Test(priority = 5)
     public void productsWithDiscountTest() throws IOException, ParseException {
+        SearchResultPage searchResultPage = new SearchResultPage();
         for (WebElement element : searchResultPage.getProductPriceList()) {
             if (element.getText().contains("%")) {
 
@@ -98,6 +64,4 @@ public class SearchResultPageTest extends BaseTest {
             System.out.println(a);
         }*/
     }
-
 }
-
