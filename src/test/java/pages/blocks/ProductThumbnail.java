@@ -40,11 +40,13 @@ public class ProductThumbnail extends BaseTest {
         Assert.assertEquals(count, productPriceWithOutDiscount.size() - 1, "Products did not sort from high to low price");
     }
 
-    public void productsWithDiscountTest() throws IOException, ParseException {
+    public boolean discountBeforeAfterEqualToDiscountAmount() throws IOException, ParseException {
         SearchResultPage searchResultPage = new SearchResultPage();
+        boolean flag = true;
         for (WebElement element : searchResultPage.getProductPriceList()) {
             if (element.getText().contains("%")) {
 
+                flag = false;
                 String a = element.getText().substring(0, element.getText().indexOf("$"));
                 String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"));
                 String c = element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1);
@@ -63,5 +65,6 @@ public class ProductThumbnail extends BaseTest {
        /* for(String a: lines) {
             System.out.println(a);
         }*/
+        return flag;
     }
 }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import common.BaseTest;
+import utils.enums.Currency;
 
 public class HomePage extends BaseTest {
 
@@ -32,20 +33,17 @@ public class HomePage extends BaseTest {
 
     @Step
     public String getCurrentProductCurrency() {
-        String UAH = "₴";
-        String USD = "$";
-        String EUR = "€";
 
-        if (currencyDropDown.getText().contains(UAH)) {
-            return UAH;
+        if (currencyDropDown.getText().contains(Currency.UAH.toString())) {
+            return Currency.UAH.toString();
         }
 
-        if (currencyDropDown.getText().contains(USD)) {
-            return USD;
+        if (currencyDropDown.getText().contains(Currency.USD.toString())) {
+            return Currency.USD.toString();
         }
 
-        if (currencyDropDown.getText().contains(EUR)) {
-            return EUR;
+        if (currencyDropDown.getText().contains(Currency.EUR.toString())) {
+            return Currency.EUR.toString();
         }
 
         return null;
