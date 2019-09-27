@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.blocks.ProductThumbnail;
 import pages.home.HomePage;
 import pages.search.SearchResultPage;
 import utils.Util;
@@ -21,12 +22,14 @@ public class SearchResultPageTest extends BaseTest {
     HomePage homePage;
     SearchResultPage searchResultPage;
     WebEventListener listener;
+    ProductThumbnail productThumbnail;
 
     @BeforeMethod
     public void setUp() {
         homePage = new HomePage();
         searchResultPage = new SearchResultPage();
         listener = new WebEventListener();
+        productThumbnail = new ProductThumbnail();
     }
 
     @Test(priority = 1)
@@ -76,28 +79,7 @@ public class SearchResultPageTest extends BaseTest {
 
     @Test(priority = 5)
     public void productsWithDiscountTest() throws IOException, ParseException {
-        for (WebElement element : searchResultPage.getProductPriceList()) {
-            if (element.getText().contains("%")) {
-
-                String a = element.getText().substring(0, element.getText().indexOf("$"));
-                String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"));
-                String c = element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1);
-                double a1 = DecimalFormat.getNumberInstance().parse(a).doubleValue();
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                System.out.println(a1);
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                double b1 = DecimalFormat.getNumberInstance().parse(b).doubleValue();
-                System.out.println(b1);
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                double c1 = DecimalFormat.getNumberInstance().parse(c).doubleValue();
-                //double c1 = DecimalFormat.getNumberInstance().parse("1,08").doubleValue();
-                System.out.println(c1);
-            }
-        }
-       /* for(String a: lines) {
-            System.out.println(a);
-        }*/
+      Assert.assertEquals(productThumbnail.discountBeforeAfterEqualToDiscountAmount(), "Discount is not equals");
     }
-
 }
 

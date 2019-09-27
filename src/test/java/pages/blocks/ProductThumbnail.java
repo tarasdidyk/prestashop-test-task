@@ -46,25 +46,22 @@ public class ProductThumbnail extends BaseTest {
         for (WebElement element : searchResultPage.getProductPriceList()) {
             if (element.getText().contains("%")) {
 
-                flag = false;
-                String a = element.getText().substring(0, element.getText().indexOf("$"));
-                String b = element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"));
-                String c = element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1);
-                double a1 = DecimalFormat.getNumberInstance().parse(a).doubleValue();
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                System.out.println(a1);
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                double b1 = DecimalFormat.getNumberInstance().parse(b).doubleValue();
-                System.out.println(b1);
-                System.out.println("tttttttttttttttttttttttttttttttttttttttttttttttttttt");
-                double c1 = DecimalFormat.getNumberInstance().parse(c).doubleValue();
-                //double c1 = DecimalFormat.getNumberInstance().parse("1,08").doubleValue();
-                System.out.println(c1);
+                double priceBeforeDiscount = DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(0, element.getText().indexOf("$"))).doubleValue();
+                double discountInPercent = DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"))).doubleValue();
+                double priceAfterDiscount = DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1)).doubleValue();
+
+                System.out.println((priceBeforeDiscount - priceAfterDiscount));
+                discountInPercent= discountInPercent*-1;
+                System.out.println((priceBeforeDiscount / 100 * discountInPercent));
+
+                if ((Math.round(priceBeforeDiscount - priceAfterDiscount)) != Math.round(priceBeforeDiscount / 100 * (discountInPercent*-1))) {
+                    flag = false;
+                }
             }
         }
-       /* for(String a: lines) {
-            System.out.println(a);
-        }*/
         return flag;
     }
 }
