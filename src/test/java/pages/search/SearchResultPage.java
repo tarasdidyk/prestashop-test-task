@@ -1,6 +1,7 @@
 package pages.search;
 
 import common.BaseTest;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultPage extends BaseTest {
-
 
     public SearchResultPage() {
         PageFactory.initElements(driver, this);
@@ -37,35 +37,34 @@ public class SearchResultPage extends BaseTest {
         return element.getText();
     }
 
-    public int getSearchResultTitleCount() {
+    @Step("Get search result amount")
+    public int getSearchResultTitleAmount() {
         return Integer.parseInt(getWebElementText(searchResultTitle).replaceAll("[\\D]", ""));
     }
 
+    @Step("Get list size")
     public int getWebElementListSize(List<WebElement> element) {
         return element.size();
     }
 
+    @Step("Get product list size")
     public int getProductListSize() {
         return getWebElementListSize(productList);
     }
 
+    @Step("Get product price list")
     public List<WebElement> getProductPriceList() {
         return productsPriceList;
     }
 
+    @Step("Open Sort dropdown")
     public void openSortingDropDown() {
         sortingDropDownList.click();
     }
 
+    @Step("Sorting by Descending")
     public void sortByDescending() {
         sortingDropDownList.isEnabled();
         sortItemByDescending.click();
-    }
-
-    public void getProductWithRegularPrice() {
-        for (WebElement listItem: getProductPriceList()) {
-            WebElement element =  listItem.findElement(By.xpath("//span[contains(@class, \"regular-price\")]"));
-            System.out.println("Test:  "+element.getText());
-        }
     }
 }

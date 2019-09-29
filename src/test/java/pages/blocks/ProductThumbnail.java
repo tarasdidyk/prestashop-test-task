@@ -1,6 +1,7 @@
 package pages.blocks;
 
 import common.BaseTest;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -19,10 +20,12 @@ public class ProductThumbnail extends BaseTest {
         PageFactory.initElements(driver, this);
     }
 
-    public void sortByDescendingTest() throws ParseException {
+    @Step("Checking sort by descending")
+    public boolean isSortByDescending() throws ParseException {
+
+        boolean flag = false;
+
         SearchResultPage searchResultPage = new SearchResultPage();
-        searchResultPage.openSortingDropDown();
-        searchResultPage.sortByDescending();
         List<Double> productPriceWithOutDiscount = new ArrayList<>();
 
         Util.delay(0, 5);
@@ -37,27 +40,27 @@ public class ProductThumbnail extends BaseTest {
                 count++;
             }
         }
-        Assert.assertEquals(count, productPriceWithOutDiscount.size() - 1, "Products did not sort from high to low price");
+        if (count == productPriceWithOutDiscount.size() - 1) {
+            flag = true;
+        }
+        return flag;
     }
 
-    public boolean discountBeforeAfterEqualToDiscountAmount() throws IOException, ParseException {
+    @Step("Checking discount is expected")
+    public boolean discountBeforeAfterEqualToDiscountAmount() throws ParseException {
         SearchResultPage searchResultPage = new SearchResultPage();
         boolean flag = true;
         for (WebElement element : searchResultPage.getProductPriceList()) {
             if (element.getText().contains("%")) {
 
-                double priceBeforeDiscount = DecimalFormat.getNumberInstance()
-                        .parse(element.getText().substring(0, element.getText().indexOf("$"))).doubleValue();
-                double discountInPercent = DecimalFormat.getNumberInstance()
-                        .parse(element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"))).doubleValue();
-                double priceAfterDiscount = DecimalFormat.getNumberInstance()
-                        .parse(element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1)).doubleValue();
+                double priceBeforeDiscountInCent = Math.round(100 * DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(0, element.getText().indexOf("$"))).doubleValue());
+                double discountInPercent = Math.round(-1 * DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(element.getText().indexOf("-"), element.getText().indexOf("%"))).doubleValue());
+                double priceAfterDiscountInCent = Math.round(100 * DecimalFormat.getNumberInstance()
+                        .parse(element.getText().substring(element.getText().indexOf("%") + 2, element.getText().lastIndexOf("$") - 1)).doubleValue());
 
-                System.out.println((priceBeforeDiscount - priceAfterDiscount));
-                discountInPercent= discountInPercent*-1;
-                System.out.println((priceBeforeDiscount / 100 * discountInPercent));
-
-                if ((Math.round(priceBeforeDiscount - priceAfterDiscount)) != Math.round(priceBeforeDiscount / 100 * (discountInPercent*-1))) {
+                if (Math.round(priceBeforeDiscountInCent - priceAfterDiscountInCent) != Math.round(priceBeforeDiscountInCent / 100 * (discountInPercent))) {
                     flag = false;
                 }
             }

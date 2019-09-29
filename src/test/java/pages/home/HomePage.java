@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import common.BaseTest;
+import utils.Util;
 import utils.enums.Currency;
 
 public class HomePage extends BaseTest {
@@ -21,17 +22,19 @@ public class HomePage extends BaseTest {
     @FindBy(xpath = "//div[contains(@id, 'search_widget')]//button[contains(@type, 'submit')]")
     private WebElement searchButton;
 
-    // init Page objects
+    @FindBy(xpath = "//header[contains(@id, 'header')]")
+    private WebElement header;
+
     public HomePage() {
         PageFactory.initElements(driver, this);
     }
 
-    @Step
+    @Step("Get page Title")
     public String getTitle() {
         return driver.getTitle();
     }
 
-    @Step
+    @Step("Get actual products currency")
     public String getCurrentProductCurrency() {
 
         if (currencyDropDown.getText().contains(Currency.UAH.toString())) {
@@ -45,35 +48,35 @@ public class HomePage extends BaseTest {
         if (currencyDropDown.getText().contains(Currency.EUR.toString())) {
             return Currency.EUR.toString();
         }
-
         return null;
     }
 
-    @Step
+    @Step("Get site actual currency")
     public String getCurrentSiteCurrency() {
-        String UAH = "₴";
-        String USD = "$";
-        String EUR = "€";
 
-        if (productsPrice.getText().contains(UAH)) {
-            return UAH;
+        if (productsPrice.getText().contains(Currency.UAH.toString())) {
+            return Currency.UAH.toString();
         }
-        if (productsPrice.getText().contains(USD)) {
-            return USD;
+        if (productsPrice.getText().contains(Currency.USD.toString())) {
+            return Currency.USD.toString();
         }
-        if (productsPrice.getText().contains(EUR)) {
-            return EUR;
+        if (productsPrice.getText().contains(Currency.EUR.toString())) {
+            return Currency.EUR.toString();
         }
         return null;
     }
 
-    @Step
+    @Step("Search by word")
     public void searchByWords(String searchQuery) {
         searchField.sendKeys(searchQuery);
         searchButton.click();
     }
 
+    @Step("Open main URL")
     public void openMainUrl() {
         driver.get(prop.getProperty("url"));
+        if (!header.isDisplayed()) {
+            Util.reloadPage();
+        }
     }
 }

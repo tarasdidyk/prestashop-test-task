@@ -4,8 +4,8 @@
 
     <test name="Home Page">
         <classes>
-            <class name="tests.home.HomePageTest"/>
-            <class name="tests.home.SearchResultPageTest"/>
+            <class name="tests.HomePageTest"/>
+            <class name="tests.SearchResultPageTest"/>
         </classes>
     </test>
 </suite>

@@ -8,7 +8,6 @@ import common.BaseTest;
 
 public class Header extends BaseTest {
 
-
     public Header() {
         PageFactory.initElements(driver, this);
     }
@@ -19,15 +18,14 @@ public class Header extends BaseTest {
     @FindBy(xpath = "//div[contains(@class,'currency-selector')]//a[contains(text(),'USD $')]")
     WebElement usdCurrencyDropDownItem;
 
-    @Step
+    @Step("Open the Currency dropdown")
     public void openCurrencyDropDown() {
         currencyDropDown.click();
     }
 
-    @Step
+    @Step("Select the USD currency in the CurrencyDropDown")
     public void selectUsdCurrency() {
         usdCurrencyDropDownItem.click();
     }
-
 
 }

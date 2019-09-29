@@ -35,4 +35,8 @@ public class Util extends BaseTest {
         }
     }
 
+    public static void reloadPage() {
+        driver.navigate().refresh();
+    }
+
 }
