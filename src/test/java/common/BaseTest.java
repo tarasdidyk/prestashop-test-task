@@ -6,6 +6,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
+import utils.ScreenshotListener;
 import utils.Util;
 import utils.WebEventListener;
 
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+@Listeners({ScreenshotListener.class})
 public class BaseTest {
 
     public static WebDriver driver;
@@ -63,7 +66,6 @@ public class BaseTest {
     public void quit() {
         driver.quit();
     }
-
 }
 
 

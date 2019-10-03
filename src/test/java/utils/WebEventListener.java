@@ -1,14 +1,15 @@
 package utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.Reporter;
 import common.BaseTest;
+import org.testng.TestListenerAdapter;
 
 public class WebEventListener extends BaseTest implements WebDriverEventListener {
+
+    TestListenerAdapter adapter = new TestListenerAdapter();
 
     public void beforeNavigateTo(String url, WebDriver driver) {
         System.out.println("Before navigating to: '" + url + "'");
@@ -156,7 +157,5 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
     public void log(String message) {
 
         Reporter.log(message + "<br>");
-
     }
-
 }
