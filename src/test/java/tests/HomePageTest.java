@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import pages.blocks.Header;
 import pages.home.HomePage;
 import common.BaseTest;
-import utils.Util;
-import utils.WebEventListener;
 import utils.enums.Currency;
 
 public class HomePageTest extends BaseTest {

@@ -75,9 +75,6 @@ public class WebEventListener extends BaseTest implements WebDriverEventListener
         log("Found Element By : " + by.toString());
     }
 
-    /*
-     * non overridden methods of WebListener class
-     */
     public void beforeScript(String script, WebDriver driver) {
     }
 
